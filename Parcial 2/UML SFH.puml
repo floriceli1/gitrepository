@@ -1,0 +1,116 @@
+@startuml
+class bd.Conexion #orange{
++String pass
++String user
++String host
+
++Connection conectaServer()
++Connection conectaBase(nombrebd)
++ResultSet ejecutaQuery(nombrebd, sql)
+
+}
+
+
+class entity.Usuario #green{
++String nombre
++String contrasena
++String correo
+
++void Usuario()
++void Usuario(nombre,contrasena,rol)
++String getNombre()
++void setNombre()
++String getContrasena()
++void setContrasena()
++String getCorreo()
++void setCorreo()
+
+}
+class entity.Venta #green{
++Double pre_ven
++Double pre_comp
++Double reci
++void Cobrar()
++void Reporte()
+
+}
+class entity.Producto #green{
++Int cantidad
++String Modelo
++String Marca
++String Bateria
++String Pixeles
++String Ram
++String Memo_int
++void Guardar()
++void Consultar()
+}
+
+
+interface model.IUsuarioModel #gray{
++DefaultTableModel modeloUsuario
++JTable tablaUsuario
++consultarUsuario()
+
++modificarUsuarios(usuario,contrasena,correo)
++insertarUsuario( bd, table, nombre, correo,contrasena)
++eliminarUsuario( bd, nombreTabla, id)
+}
+interface model.IVentaModel #gray{
++DefaultTableModel modeloVenta
++JTable tablaVenta
++consultarVenta()
+
++modificarVenta(idmodelo,idU,cantidad,fecha_com,ganancia)
++insertarVenta(idmodelo,idU,cantidad,fecha_com,ganancia)
++eliminarVenta(bd, nombreTabla, id)
+}
+interface model.IProductoModel #gray{
++DefaultTableModel modeloProducto
++JTable tablaProducto
++consultarProducto()
+
++modificarProducto(bd, table, id_modelo, marca, ram, memoriaint, bateria, pixeles, pre_ven, pre_com, cantidad, tab)
++insertarProducto(bd, table, id_modelo, marca, ram, memoriaint, bateria, pixeles, pre_ven, pre_com, cantidad, tab)
++eliminarProducto(bd, nombreTabla, id)
+}
+
+
+
+class controller.ReporteVentaController #yellow{
++GenerarReport()
+
+}
+class controller.UsuarioController #yellow{
++IniciaSesion()
++Validacion()
+
+}
+class controller.VentaController #yellow{
++Comprar()
+
+}
+class controller.ProductoController #yellow{
++modificarProducto()
++insertarProducto()
++eliminarProducto()
+}
+
+
+class view.JFrame #violet{
+JMenuItem iniciarSesion;
+JMenuItem itemInventario;
+JMenuItem itemPermisos;
+JMenuItem itemReporte;
+JMenuItem itemUsuarios;
+}
+class view.JDialog #violet{
+JButton aceptarAdministrador;
+JButton atrasBtn;
+JButton botonCobrar;
+JButton botonEliminarp;
+JButton botonatrasRep;
+}
+ 
+
+@enduml
