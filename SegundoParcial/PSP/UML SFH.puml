@@ -12,14 +12,13 @@ class bd.Conexion #orange{
 
 
 class entity.Usuario #green{
-+String nombre
-+String contrasena
-+String correo
+-usuario String 
+-contrasena String 
+-correo String 
 
-+void Usuario()
-+void Usuario(nombre,contrasena,rol)
-+String getNombre()
-+void setNombre()
+
++String getUsuario()
++void setUsuario()
 +String getContrasena()
 +void setContrasena()
 +String getCorreo()
@@ -27,49 +26,66 @@ class entity.Usuario #green{
 
 }
 class entity.Venta #green{
-+Double pre_ven
-+Double pre_comp
-+Double reci
-+void Cobrar()
-+void Reporte()
+-idU int 
+-usuario String
+-contrasena String
+-correo String
+
++String getidU()
++void setidU()
++String getUsuario()
++void setUsuario()
++String getcontrasena()
++void setcontrasena()
++String getcorreo()
++void setcorreo()
+
 
 }
 class entity.Producto #green{
-+Int cantidad
-+String Modelo
-+String Marca
-+String Bateria
-+String Pixeles
-+String Ram
-+String Memo_int
-+void Guardar()
-+void Consultar()
+-cantidad Int
+-Modelo String 
+-Marca String 
+-Bateria String 
+-Pixeles String 
+-Ram String 
+-Memo_int String 
+
+
++int getcantidad()
++void setcantidad()
++String getModelo()
++void setModelo()
++String getMarca()
++void setMarca()
++String getBateria()
++void setBateria()
++String getPixeles()
++void setPixeles()
++String getRam()
++void setRam()
++String getMemo_int()
++void setMemo_int()
+
 }
 
 
 interface model.IUsuarioModel #gray{
-+DefaultTableModel modeloUsuario
-+JTable tablaUsuario
-+consultarUsuario()
 
+
++consultarUsuario()
 +modificarUsuarios(usuario,contrasena,correo)
-+insertarUsuario( bd, table, nombre, correo,contrasena)
-+eliminarUsuario( bd, nombreTabla, id)
++insertarUsuario(nombre, correo,contrasena)
++eliminarUsuario(nombreTabla, id)
 }
 interface model.IVentaModel #gray{
-+DefaultTableModel modeloVenta
-+JTable tablaVenta
 +consultarVenta()
-
 +modificarVenta(idmodelo,idU,cantidad,fecha_com,ganancia)
 +insertarVenta(idmodelo,idU,cantidad,fecha_com,ganancia)
 +eliminarVenta(bd, nombreTabla, id)
 }
 interface model.IProductoModel #gray{
-+DefaultTableModel modeloProducto
-+JTable tablaProducto
 +consultarProducto()
-
 +modificarProducto(bd, table, id_modelo, marca, ram, memoriaint, bateria, pixeles, pre_ven, pre_com, cantidad, tab)
 +insertarProducto(bd, table, id_modelo, marca, ram, memoriaint, bateria, pixeles, pre_ven, pre_com, cantidad, tab)
 +eliminarProducto(bd, nombreTabla, id)
@@ -96,7 +112,6 @@ class controller.ProductoController #yellow{
 +eliminarProducto()
 }
 
-
 class view.JFrame #violet{
 JMenuItem iniciarSesion;
 JMenuItem itemInventario;
@@ -104,13 +119,47 @@ JMenuItem itemPermisos;
 JMenuItem itemReporte;
 JMenuItem itemUsuarios;
 }
-class view.JDialog #violet{
-JButton aceptarAdministrador;
-JButton atrasBtn;
-JButton botonCobrar;
-JButton botonEliminarp;
-JButton botonatrasRep;
-}
+
  
+class view.JDialogInventario #violet{
+}
+
+class view.JDialogRegistrar #violet{
+}
+
+
+class view.JDialogTablaEmpleado #violet{
+}
+
+
+class view.JDialogTablaAdministrador #violet{
+}
+
+class view.JDialogCobrar #violet{
+}
+
+
+class view.JDialogAgregarP #violet{
+}
+
+
+class view.JDialogModificarP #violet{
+}
+
+
+class view.JDialogUsuario #violet{
+}
+
+
+class view.JDialogModificarusuario #violet{
+}
+
+
+class view.JDialogAdministrarusuario #violet{
+}
+
+
+class view.JDialogReporte #violet{
+}
 
 @enduml
