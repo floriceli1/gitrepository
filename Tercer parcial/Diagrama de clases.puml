@@ -1,0 +1,220 @@
+@startuml
+class bd.Conexion #orange{
++String pass
++String user
++String host
+
++Connection conectaServer()
++Connection conectaBase(nombrebd)
++ResultSet ejecutaQuery(nombrebd, sql)
+
+}
+
+
+class entity.Usuario #green{
+-usuario String 
+-contrasena String 
+-correo String 
+
+
++String getUsuario()
++void setUsuario()
++String getContrasena()
++void setContrasena()
++String getCorreo()
++void setCorreo()
+
+}
+class entity.Venta #green{
+-idU int 
+-usuario String
+-contrasena String
+-correo String
+
++String getidU()
++void setidU()
++String getUsuario()
++void setUsuario()
++String getcontrasena()
++void setcontrasena()
++String getcorreo()
++void setcorreo()
+
+
+}
+class entity.Producto #green{
+-cantidad Int
+-Modelo String 
+-Marca String 
+-Bateria String 
+-Camara String 
+-Ram String 
+-Memo_int String
++int getcantidad()
++void setcantidad()
++String getModelo()
++void setModelo()
++String getMarca()
++void setMarca()
++String getBateria()
++void setBateria()
++String getCamara()
++void setCamara()
++String getRam()
++void setRam()
++String getMemo_int()
++void setMemo_int()
+ 
+}
+
+class entity.Memo_int #green{
+-String modelo;
+-String capacidad;
+}
+
+class entity.Bateria #green{
+-String modelo;
+-String precio;
+}
+
+class entity.Camara #green{
+-String modelo;
+-String pixeles;
+}
+
+class entity.Ram #green{
+-String modelo;
+-String capacidad;
+}
+
+
+interface model.IUsuarioModel #gray{
+
+
++consultarUsuario()
++modificarUsuarios(usuario,contrasena,correo)
++insertarUsuario(nombre, correo,contrasena)
++eliminarUsuario(nombreTabla, id)
+}
+interface model.IVentaModel #gray{
++consultarVenta()
++modificarVenta(idmodelo,idU,cantidad,fecha_com,ganancia)
++insertarVenta(idmodelo,idU,cantidad,fecha_com,ganancia)
++eliminarVenta(bd, nombreTabla, id)
+}
+interface model.IProductoModel #gray{
++consultarProducto()
++modificarProducto(bd, table, id_modelo, marca, ram, memoriaint, bateria, pixeles, pre_ven, pre_com, cantidad, tab)
++insertarProducto(bd, table, id_modelo, marca, ram, memoriaint, bateria, pixeles, pre_ven, pre_com, cantidad, tab)
++eliminarProducto(bd, nombreTabla, id)
+}
+class controller.ReporteVentaController #yellow{
++GenerarReport()
+
+}
+class controller.UsuarioController #yellow{
++IniciaSesion()
++Validacion()
+
+}
+class controller.VentaController #yellow{
++Comprar()
+
+}
+class controller.ProductoController #yellow{
++modificarProducto()
++insertarProducto()
++eliminarProducto()
+}
+
+class view.JFrame #violet{
+JMenuItem iniciarSesion;
+JMenuItem itemInventario;
+JMenuItem itemPermisos;
+JMenuItem itemReporte;
+JMenuItem itemUsuarios;
+}
+
+ 
+class view.JDialogInventario #violet{
+}
+
+class view.JDialogRegistrar #violet{
+}
+
+
+class view.JDialogTablaEmpleado #violet{
+}
+
+
+class view.JDialogTablaAdministrador #violet{
+}
+
+class view.JDialogCobrar #violet{
+}
+
+
+class view.JDialogAgregarP #violet{
+}
+
+
+class view.JDialogModificarP #violet{
+}
+
+
+class view.JDialogUsuario #violet{
+}
+
+
+class view.JDialogModificarusuario #violet{
+}
+
+
+class view.JDialogAdministrarusuario #violet{
+}
+
+
+class view.JDialogReporte #violet{
+}
+
+bd <--- model
+bd ---> model
+
+controller <--- model
+controller ---> model
+
+
+controller <--- view
+controller ---> view
+
+model <--- entity
+model ---> entity
+
+
+entity.Producto *---- entity.Memo_int
+entity.Producto *---- entity.Bateria
+entity.Producto o---- entity.Camara
+entity.Producto o---- entity.Ram
+entity.Venta *---- entity.Producto
+entity.Venta *---- entity.Usuario
+
+view.JFrame <---- view.JDialogInventario
+view.JFrame <---- view.JDialogRegistrar
+view.JFrame <---- view.JDialogTablaEmpleado
+view.JFrame <---- view.JDialogTablaAdministrador
+view.JFrame <---- view.JDialogCobrar
+view.JFrame <---- view.JDialogAgregarP
+view.JFrame <---- view.JDialogModificarP
+view.JFrame <---- view.JDialogUsuario
+view.JFrame <---- view.JDialogModificarusuario
+view.JFrame <---- view.JDialogAdministrarusuario
+view.JFrame <---- view.JDialogReporte
+
+
+model.IVentaModel *---- model.IProductoModel
+model.IVentaModel *---- model.IUsuarioModel
+
+controller.VentaController *---- controller.ProductoController
+controller.VentaController *---- controller.UsuarioController
+controller.ReporteVentaController *----- controller.VentaController
+@enduml
